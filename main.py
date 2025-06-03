@@ -1,16 +1,26 @@
 import pythonGraph as pg
+from cpt import CPTClass
 
 #Game Setup Parameters
+#These contstants can be adjusted to change the size of the game
 X_NUM_TILES = 24
 Y_NUM_TILES = 18
+#Width of the lines between the grids
 LINE_WIDTH = 3
+#Width of the square cells in pixels
 TILE_WIDTH = 32
+#The total number of tiles in the grid programatically
+TOTAL_TILES = X_NUM_TILES * Y_NUM_TILES
+#Start with a prior probability so that we are not multiplying the CPT by 0
+PRIOR_PROB = 1 / TOTAL_TILES
 
 WINDOW_WIDTH = (X_NUM_TILES * TILE_WIDTH) + ((X_NUM_TILES + 1) * LINE_WIDTH)
 WINDOW_HEIGHT = (Y_NUM_TILES * TILE_WIDTH) + ((Y_NUM_TILES + 1) * LINE_WIDTH)
 
 #Initalize a dictionary of start postions. The key will be a tuple of the x and y cell position. The value will be a tuple of the pixel position
 tile_start_pos_dictionary = {} 
+#Initialize the CPT Object
+current_cpt = CPTClass(PRIOR_PROB, X_NUM_TILES, Y_NUM_TILES)
 
 #Ok, let's see if we can build a grid
 
