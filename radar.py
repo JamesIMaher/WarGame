@@ -9,8 +9,8 @@ class RadarClass:
     max_x_cells = -1
     max_y_cells = -1
     max_dist = -1
-    radar_position_x = -1
-    radar_position_y = -1
+    radar_position_x = 4
+    radar_position_y = 15
     line_width = -1
     cell_width = -1
 
@@ -32,9 +32,9 @@ class RadarClass:
             else: #Distance should receive the prior probability
                 self.cpt_prob_table[distance] = start_prob - (decrease_per_grid * distance)
     
-    def color_cells(self, x_cell, y_cell, tile_width):
-        start_pos_tuple = cell_to_start_pix(x_cell, y_cell, self.cell_width, self.line_width)
-        for distance in range(1, self.max_dist):
-            if distance == 1:
-                pg.draw_image("tiles/Ocean_tile.png", start_pos_tuple[0], start_pos_tuple[1], tile_width, tile_width)
+    def color_cells(self, tile_width, dist_dict):
+        for cell in dist_dict:
+            if dist_dict[cell] == True:
+                pixels = cell_to_start_pix(cell[0], cell[1], self.cell_width, self.line_width)
+                pg.draw_image("tiles/Ocean_tile.png", pixels[0], pixels[1], tile_width, tile_width)
 

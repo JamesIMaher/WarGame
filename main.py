@@ -1,6 +1,7 @@
 import pythonGraph as pg
 from cpt import CPTClass
 from radar import RadarClass
+from util import id_euclid_cells
 
 def initialize_game():
     pg.clear_window("white")
@@ -62,7 +63,14 @@ pg.set_window_title("WarGames - An AI Training Environment")
 initialize_game()
 
 #Test adding a radar site
-
+testRadar = RadarClass(start_prob=0, 
+                       decrease_per_grid=0.1, 
+                       max_dist=5, 
+                       max_x_cells=X_NUM_TILES, 
+                       max_y_cells=Y_NUM_TILES, 
+                       line_width=LINE_WIDTH, 
+                       cell_width=TILE_WIDTH)
+test_dist_dict = id_euclid_cells(testRadar.radar_position_x, testRadar.radar_position_y, 2, X_NUM_TILES, Y_NUM_TILES) 
 #Try tiling everything with Ocean Tiles
 while pg.window_not_closed():
     if(pg.mouse_button_pressed("LEFT")):
@@ -72,6 +80,7 @@ while pg.window_not_closed():
         position_tuple = determine_cell_coords(x_click, y_click)
         output_string = "The X grid position is: " + str(position_tuple[0]) + " and the Y grid position is: " + str(position_tuple[1])
         pg.draw_text(output_string, 50, WINDOW_HEIGHT - 50, "BLACK")
+    testRadar.color_cells(TILE_WIDTH, test_dist_dict)
     pg.update_window()
 
 
