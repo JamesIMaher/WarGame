@@ -2,6 +2,7 @@ import pythonGraph as pg
 from cpt import CPTClass
 from radar import RadarClass
 from util import id_euclid_cells
+from aircraft import AircraftClass
 
 def initialize_game():
     pg.clear_window("white")
@@ -20,6 +21,9 @@ def initialize_game():
         y_tile_count = 1
     #Testing
     pg.draw_image("tiles/Forest_tile.png", tile_start_pos_dictionary[(1,2)][0], tile_start_pos_dictionary[(1,2)][1], TILE_WIDTH, TILE_WIDTH)
+    #Create an airplane for testing
+    testAirplane = AircraftClass(X_NUM_TILES, Y_NUM_TILES, TILE_WIDTH, LINE_WIDTH)
+    testAirplane.draw_unit()
 
 #Receives the x and y coordinates of a mouse click and then determine the grid position of the click
 def determine_cell_coords(x,y):
